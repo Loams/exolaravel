@@ -14,3 +14,12 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+
+Route::get('article/{n}', function ($n){
+	return view('article')->with('numero', $n);
+})->where('n', '[0-9]+');
+
+Route::get('facture/{n}', function ($n){
+	return view('facture')->with('numero', $n);
+})->where('n', '[0-9]+');
