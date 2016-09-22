@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 
 use App\Http\Requests\ImagesRequest;
+use App\Gestion\PhotoGestionInterface;
 
 class PhotoController extends Controller
 {
@@ -15,19 +16,13 @@ class PhotoController extends Controller
     	return view('photo');
     }
 	
-	public function postForm(ImagesRequest $request){
-		$image = $request->file('image');
-		if ($image->isValid())
+	public function postForm(
+		ImagesRequest $request,
+		PhotoGestionInterface $photogestion)
+	{
+		if ($photogestion->save($request->file('image')))
 		{
-			$chemin=config('images.path');
-			$extension=$image->getClientOriginalExtension();
-			do{
-				$nom=str_random(10) . '.' . $extension;
-			}while(file_exists($chemin . '/' . $nom));
-			if($image->move($chemin, $nom))
-			{
-				return view('photo_ok');
-			}
+			return view('photo_ok');
 		}
 		return redirect('photo')->with('error', 'Désolé mais votre image ne peut être envoyée !');
 	}
