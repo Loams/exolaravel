@@ -29,3 +29,10 @@ Route::post('contact', 'ContactController@postForm');
 
 Route::get('photo', 'PhotoController@getForm');
 Route::post('photo', 'PhotoController@postForm');
+
+Route::group(['middleware' => ['web']], function () {
+    Route::get('sondage', 'SondageController@index');
+    Route::get('sondage/create/{nom}', 'SondageController@create');
+    Route::post('sondage/{nom}', 'SondageController@store');
+});
+
