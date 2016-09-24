@@ -6,20 +6,23 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 
-use App\Email;
 
 use App\Http\Requests\EmailRequest;
 
+use App\Repositories\EmailRepository;
+
 class EmailController extends Controller
 {
-    public function getForm(){
+    public function getForm()
+    {
     	return view('email');
     }
 	
-	public function postForm(EmailRequest $request){
-		$email = new Email;
-		$email->email=$request->input('email');
-		$email->save();
+	public function postForm(
+		EmailRequest $request, 
+		EmailRepository $emailRepository)
+	{
+		$emailRepository->save($request->input('email'));
 		return view('email_ok');
 	} 
 }
