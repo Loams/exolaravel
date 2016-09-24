@@ -36,3 +36,5 @@ Route::group(['middleware' => ['web']], function () {
     Route::post('sondage/{nom}', 'SondageController@store');
 });
 
+Route::get('email', 'EmailController@getForm');
+Route::post('email', ['uses'=>'EmailController@postForm','as'=>'storeEmail']);
