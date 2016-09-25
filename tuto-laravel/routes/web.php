@@ -38,3 +38,6 @@ Route::group(['middleware' => ['web']], function () {
 
 Route::get('email', 'EmailController@getForm');
 Route::post('email', ['uses'=>'EmailController@postForm','as'=>'storeEmail']);
+
+Route::resource('user', 'UserController');
+
