@@ -41,3 +41,5 @@ Route::post('email', ['uses'=>'EmailController@postForm','as'=>'storeEmail']);
 
 Route::resource('user', 'UserController');
 
+Route::resource('post', 'PostController', ['except' => ['show', 'edit', 'update']]);
+
