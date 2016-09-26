@@ -14,7 +14,11 @@
 				<div class="form-group {!! $errors->has('contenu') ? 'has-error' : '' !!}">
 					{!! Form::textarea('contenu', null, ['class'=>'form-control', 'placeholder' => 'Contenu']) !!}
 					{!! $errors->first('contenu', '<small class="help-block">:message</small>') !!}
-				</div> 
+				</div>
+				<div class="form-group {!! $errors->has('tags') ? 'has-error' : '' !!}">
+					{!! Form::text('tags', null, ['class'=>'form-control', 'placeholder' => 'Entrez les mots-clés séparés par des virgules']) !!}
+					{!! $errors->first('tags', '<small class="help-block">:message</small>') !!}
+				</div>  
 				 {!! Form::submit('Envoyer', ['class'=>'btn btn-info pull-right']) !!}
 				 {!! Form::close() !!}
 			</div>

@@ -13,18 +13,30 @@ class PostRepository
 		$this->post = $post;
 	}
 	
-	public function getPaginate($n)
+	private function queryWithUserAndTags()
 	{
-		return $this->post->with('user')->orderBy('posts.created_at', 'desc')->paginate($n);
+		return $this->post->with('user', 'tags')->orderBy('posts.created_at', 'desc');
+	}
+	
+	public function getWithUserAndTagsPaginate($n)
+	{
+		return $this->queryWithUserAndTags()->paginate($n);
+	}
+	
+	public function getWithUserAndTagsForTagPaginate($tag, $n)
+	{
+		return $this->queryWithUserAndTags()->whereHas('tags', function($q) use ($tag){$q->where('tags.tag_url', $tag);})->paginate($n);
 	}
 	
 	public function store($inputs)
 	{
-		$this->post->create($inputs);
+		$this->post->create($inputs); 
 	}
 	
 	public function destroy($id)
 	{
-		$this->post->findOrFail($id)->delete();
+		$post = $this->post->findOrFail($id);
+		$post->tags()->detach();
+		$post->delete();
 	}
 }
