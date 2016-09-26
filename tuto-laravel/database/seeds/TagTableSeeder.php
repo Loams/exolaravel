@@ -16,12 +16,12 @@ class TagTableSeeder extends Seeder
 		for($i=0; $i<20; ++$i)
 		{
 			$date = $this->randDate();
-			DB::table('tags')->insert([
+			DB::table('tags')->insert(array(
 			'tag' => 'tag ' . $i,
-			'tag_url' => 'tag-' . $i,
+			'tag_url' => 'tag' . $i,
 			'created_at' => $date,
 			'updated_at' => $date,
-			]);
+			));
 		}
 	}
 }

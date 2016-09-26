@@ -12,14 +12,14 @@ class CreateTagsTable extends Migration
      * @return void
      */
     public function up()
-    {
-        Schema::create('tags',function(Blueprint $table){
-        	$table->increments('id');
+	{
+		Schema::create('tags', function(Blueprint $table) {
+			$table->increments('id');
 			$table->timestamps();
 			$table->string('tag', 50)->unique();
 			$table->string('tag_url', 60)->unique();
-        });
-    }
+		});
+	}
 
     /**
      * Reverse the migrations.

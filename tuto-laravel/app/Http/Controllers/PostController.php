@@ -55,8 +55,8 @@ class PostController extends Controller
 	
 	public function indexTag($tag)
 	{
-		$posts=$this->postRepository->getWithUserAndTagsForTagPaginate($tag, $this->nbrPerPage);
+		$posts = $this->postRepository->getWithUserAndTagsForTagPaginate($tag, $this->nbrPerPage);
 		$links = $posts->render();
-		return view('post.liste', compact('posts', 'links'))->with('info', 'Resultas pourla recherche du mot-clé : ' . $tag);
+		return view('posts.liste', compact('posts', 'links'))->with('info', 'Resultats pourla recherche du mot-clé : ' . $tag); 
 	}
 }
